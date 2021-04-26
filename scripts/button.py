@@ -26,8 +26,7 @@ class Button:
             self.is_hovered = False
             self.color = (255, 255, 100)
 
-    def clicked(self):
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN and self.is_hovered:
-                self.func()
+    def clicked(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN and self.is_hovered:
+            self.func()
 

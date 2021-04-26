@@ -25,23 +25,22 @@ def exit_game():
 
 def menu():
     title = Text("Fp24", font, (400, 50))
-    play = Button(400, 350, 500, 100, "Play", font, enter_game)
-    settings = Button(400, 450, 500, 100, "Settings", font, enter_game)
-    quit = Button(400, 550, 500, 100, "Quit", font, terminate)
+    play = Button(400, 350, 500, 100, "Play", font, func=enter_game)
+    settings = Button(400, 450, 500, 100, "Settings", font, func=enter_game)
+    quit = Button(400, 550, 500, 100, "Quit", font, func=terminate)
     while STATE == config.MENU_STATE:
         quit.hovered()
-        quit.clicked()
-
         play.hovered()
-        play.clicked()
-
         settings.hovered()
-        settings.clicked()
 
         for event in pygame.event.get():
             if event.type == QUIT:
                 exit_game()
                 break
+            if event.type == MOUSEBUTTONDOWN:
+                settings.clicked(event)
+                play.clicked(event)
+                quit.clicked(event)
 
         win.fill((0, 0, 0))
         title.render(win, 300)
