@@ -65,8 +65,9 @@ def game():
         pygame.display.update()
         clock.tick(config.FPS)
 
-menu()
-if STATE == config.GAME_STATE:
-    game()
-else:
-    terminate()
+if __name__ == "__main__":
+    menu()
+    if STATE == config.GAME_STATE:
+        game()
+    else:
+        terminate()
