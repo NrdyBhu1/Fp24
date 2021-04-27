@@ -6,6 +6,8 @@ from scripts.font import Font
 from scripts.text import Text
 from scripts.player import Player
 from scripts.coin import Coin
+from scripts.bar import Bar
+from scripts.settings import SettingsHandler
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -104,12 +106,21 @@ def game():
 
 
 def settings():
-    play_music = RadioButton(100, 100, 50, "Play Music", font)
-    play_sounds = RadioButton(100, 180, 50, "Play Sounds", font)
-    back = Button(50, 550, 100, 100, "<", font, enter_menu)
+    settings_handler = SettingsHandler("settings.json")
+    settings_data = settings_handler.load_data()
+    settings_title = Text("Settings", font, (360, 25))
+    play_music = RadioButton(100, 200, 50, "Play Music", font)
+    play_sounds = RadioButton(100, 310, 50, "Play Sounds", font)
+    music_vol = Bar((100, 430), 1, 4)
+    sound_vol = Bar((100, 575), 1, 4)
+    back = Button(0, 0, 100, 100, "<", font, enter_menu)
+    play_music.selected = settings_data['play_music']
+    play_sounds.selected = settings_data['play_sounds']
     while STATE == config.SETTINGS_STATE:
         play_music.hovered()
         play_sounds.hovered()
+        music_vol.hovered()
+        sound_vol.hovered()
         back.hovered()
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -120,12 +131,22 @@ def settings():
                 play_music.clicked(event)
                 play_sounds.clicked(event)
 
+            music_vol.dragged(event)
+            sound_vol.dragged(event)
+
         win.fill((0, 0, 0))
+        settings_title.render(win, 200)
         play_music.render(win)
         play_sounds.render(win)
+        music_vol.render(win)
+        sound_vol.render(win)
         back.render(win)
         pygame.display.update()
         clock.tick(config.FPS)
+
+    settings_data['play_music'] = play_music.selected
+    settings_data['play_sounds'] = play_sounds.selected
+    settings_handler.save_data(settings_data)
 
     if STATE == config.MENU_STATE:
         menu()
@@ -136,4 +157,5 @@ def settings():
     elif STATE == config.END_STATE:
         terminate()
 
-menu()
+if __name__ == '__main__':
+    menu()
