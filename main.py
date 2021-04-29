@@ -109,10 +109,12 @@ def settings():
     settings_handler = SettingsHandler("settings.json")
     settings_data = settings_handler.load_data()
     settings_title = Text("Settings", font, (360, 25))
+    music_vol_title = Text("Music Vol", font, (550, 420))
+    sound_vol_title = Text("Sounds Vol", font, (550, 560))
     play_music = RadioButton(100, 200, 50, "Play Music", font)
     play_sounds = RadioButton(100, 310, 50, "Play Sounds", font)
-    music_vol = Bar((100, 430), 1, 4)
-    sound_vol = Bar((100, 575), 1, 4)
+    music_vol = Bar((100, 430), settings_data['music_vol'], 4)
+    sound_vol = Bar((100, 575), settings_data['sounds_vol'], 4)
     back = Button(0, 0, 100, 100, "<", font, enter_menu)
     play_music.selected = settings_data['play_music']
     play_sounds.selected = settings_data['play_sounds']
@@ -138,6 +140,8 @@ def settings():
         settings_title.render(win, 200)
         play_music.render(win)
         play_sounds.render(win)
+        music_vol_title.render(win, 80)
+        sound_vol_title.render(win, 80)
         music_vol.render(win)
         sound_vol.render(win)
         back.render(win)
@@ -146,6 +150,8 @@ def settings():
 
     settings_data['play_music'] = play_music.selected
     settings_data['play_sounds'] = play_sounds.selected
+    settings_data['music_vol'] = music_vol.value
+    settings_data['sounds_vol'] = sound_vol.value
     settings_handler.save_data(settings_data)
 
     if STATE == config.MENU_STATE:
