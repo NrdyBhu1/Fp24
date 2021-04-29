@@ -1,7 +1,7 @@
 import pygame
 
 class Bar:
-    def __init__(self, pos, value=0, size_ratio=1):
+    def __init__(self, pos, value, size_ratio=1):
         self.pos = pos
         self.value = value
         self.holder = pygame.Rect(self.pos[0], self.pos[1], 100*size_ratio, 10*size_ratio)
