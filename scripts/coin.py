@@ -3,7 +3,8 @@ from scripts.utils import crop_img
 
 class Coin:
     def __init__(self, pos, size):
-        self.sprite = pygame.image.load("assets/img/coin.png").convert_alpha()
+        self.sprite = pygame.image.load("assets/img/coin.png")
+        self.sprite = self.sprite.convert_alpha(self.sprite)
         self.frames = []
         self.current_frame = 0
         self.rect = pygame.Rect(pos[0], pos[1], size, size)
