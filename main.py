@@ -1,6 +1,7 @@
-import pygame, sys, math
+import pygame
+import sys
 import config
-from pygame.locals import *
+from pygame.locals import MOUSEBUTTONDOWN, QUIT
 from scripts.button import Button, RadioButton
 from scripts.font import Font
 from scripts.text import Text
@@ -17,25 +18,31 @@ font = Font("./assets/fonts/m6x11.ttf")
 global STATE
 STATE = config.MENU_STATE
 
+
 def terminate():
     pygame.quit()
     sys.exit()
+
 
 def enter_game():
     global STATE
     STATE = config.GAME_STATE
 
+
 def enter_menu():
     global STATE
     STATE = config.MENU_STATE
+
 
 def exit_game():
     global STATE
     STATE = config.END_STATE
 
+
 def enter_settings():
     global STATE
     STATE = config.SETTINGS_STATE
+
 
 def menu():
     title = Text("Fp24", font, (400, 50))
@@ -162,6 +169,7 @@ def settings():
         settings()
     elif STATE == config.END_STATE:
         terminate()
+
 
 if __name__ == '__main__':
     menu()

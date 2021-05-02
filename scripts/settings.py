@@ -1,5 +1,6 @@
 import json
 
+
 class SettingsHandler:
     def __init__(self, settings_file):
         self.file = settings_file

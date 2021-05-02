@@ -1,3 +1,5 @@
+
+
 class Text:
     def __init__(self, text, font, pos):
         self.text = text
