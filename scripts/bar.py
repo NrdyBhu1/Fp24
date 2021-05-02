@@ -1,5 +1,6 @@
 import pygame
 
+
 class Bar:
     def __init__(self, pos, value, size_ratio=1):
         self.pos = pos

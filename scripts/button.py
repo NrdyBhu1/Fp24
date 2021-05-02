@@ -6,6 +6,7 @@ class Button:
         self.font = font
         self.rect = pygame.Rect(x, y, w, h)
         self.color = color
+        self.sound = pygame.mixer.Sound("./assets/sounds/select.mkv")
         self.func = func
         self.is_hovered = False
 
@@ -20,9 +21,11 @@ class Button:
     def hovered(self):
         mouse_pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(mouse_pos):
+            self.sound.play(maxtime=1)
             self.is_hovered = True
             self.color = (100, 100, 100)
         else:
+            self.sound.stop()
             self.is_hovered = False
             self.color = (255, 255, 100)
 

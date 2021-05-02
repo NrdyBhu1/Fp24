@@ -1,6 +1,7 @@
 import pygame
 from scripts.utils import crop_img
 
+
 class Player:
     def __init__(self):
         self.rect = pygame.Rect(600, 100, 50, 70)
@@ -18,7 +19,7 @@ class Player:
 
     def render(self, win):
         # if self.current_frame >= 2:
-            # self.current_frame = 0
+        #   self.current_frame = 0
         # self.current_frame += 1
         win.blit(self.frames[self.current_frame], self.rect)
 
